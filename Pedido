@@ -1,0 +1,17 @@
+@startuml
+title Diagrama de Estados - Pedido Honeymoon
+
+[*] --> Pendiente
+
+Pendiente : Pedido creado, sin pago
+Pendiente --> Pagado : pago confirmado
+Pagado --> EnPreparacion : se inicia el empaquetado
+EnPreparacion --> Enviado : pedido despachado
+Enviado --> Entregado : cliente recibe el pedido
+Entregado --> [*]
+
+Pendiente --> Cancelado : cliente o sistema cancela
+Pagado --> Cancelado : error en preparación
+Enviado --> Devuelto : cliente devuelve pedido
+Devuelto --> [*]
+@enduml
