@@ -1,0 +1,28 @@
+@startuml
+title Diagrama de Estados - Cliente en la tienda web Honeymoon
+
+[*] --> Navegando
+
+state Navegando {
+  NavegaPorCatalogo : Visualiza productos
+  VerDetalleProducto : Consulta información de un jabón
+  NavegaPorCatalogo --> VerDetalleProducto : clic en producto
+  VerDetalleProducto --> NavegaPorCatalogo : regresa al catálogo
+}
+
+Navegando --> AgregandoCarrito : selecciona "Agregar al carrito"
+AgregandoCarrito --> RevisandoCarrito : clic en "Ver carrito"
+RevisandoCarrito --> ModificandoCarrito : cambia cantidad o elimina producto
+RevisandoCarrito --> IniciandoCompra : clic en "Proceder al pago"
+
+IniciandoCompra --> IniciandoSesion : no ha iniciado sesión
+IniciandoSesion --> ConfirmandoPedido : login exitoso
+IniciandoCompra --> ConfirmandoPedido : usuario ya autenticado
+
+ConfirmandoPedido --> Pagando : elige método de pago
+Pagando --> PedidoConfirmado : pago exitoso
+Pagando --> PedidoFallido : error en el pago
+
+PedidoConfirmado --> [*]
+PedidoFallido --> RevisandoCarrito : reintenta compra
+@enduml
