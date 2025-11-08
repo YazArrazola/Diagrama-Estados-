@@ -1,0 +1,12 @@
+@startuml
+title Diagrama de Estados - Producto Honeymoon
+
+[*] --> Disponible
+
+Disponible --> EnCarrito : cliente lo agrega al carrito
+EnCarrito --> Disponible : cliente elimina del carrito
+EnCarrito --> Vendido : se realiza la compra
+Vendido --> EnInventario : se repone stock
+Vendido --> Agotado : sin existencias
+Agotado --> Disponible : reabastecimiento
+@enduml
